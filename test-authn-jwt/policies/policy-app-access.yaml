@@ -1,0 +1,27 @@
+# Group and policy for $JWT_SERVICE_ID hosts
+- !group $JWT_SERVICE_ID-admins
+- !policy
+  id: jwt-apps/$JWT_SERVICE_ID
+  owner: !group $JWT_SERVICE_ID-admins
+  body:
+  - !layer
+  - &$JWT_SERVICE_ID-hosts
+    - !host
+      id: $JWT_HOST_ID
+      annotations:
+        authn-jwt/$JWT_SERVICE_ID/name: $JWT_SERVICE_ID 
+  - !grant
+    role: !layer
+    members: *$JWT_SERVICE_ID-hosts
+
+# Give the host permission to authenticate to Conjur 
+- !grant
+  roles: !group conjur/authn-jwt/$JWT_SERVICE_ID/apps
+  members: !layer jwt-apps/$JWT_SERVICE_ID
+
+# Grant the host permissions to the JWT Authenticator and secrets
+- !grant
+  roles:
+  - !group conjur/authn-jwt/$JWT_SERVICE_ID/apps
+  - !layer test/test_hosts
+  member: !host jwt-apps/$JWT_SERVICE_ID/$JWT_HOST_ID

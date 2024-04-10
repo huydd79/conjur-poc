@@ -1,0 +1,10 @@
+- !grant
+  role: !group poc/conjur2/conjur2/delegation/consumers
+  member:
+    - !group test/test_users
+    - !layer test/test_hosts
+- !grant
+  role: !group poc/sync1/conjur/delegation/consumers
+  member:
+    - !group test/test_users
+    - !layer test/test_hosts
