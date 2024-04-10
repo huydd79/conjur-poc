@@ -30,4 +30,4 @@ After that, script 02 will do the authentication testing and retrieving secret c
 This folder contain scripts to simulate an application request using JWT authentiation. You will need to use jwtgen tool to generate jwt token and configure conjur to accept authn-jwt authenticator and also trust the jwt issuer. Detail of jwtgen can be seen at https://github.com/huydd79/jwtgen
 After done script 01 and 02 for generating jwt and configuring conjur, you can run sript 03 to simulate the application sending request to conjur using rest api
 
-## Hope this help you to quickly build up your testing environment
+## Hope this help you to quickly build up your conjur environment for testing and poc/demo purpose
