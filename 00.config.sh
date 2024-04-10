@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Change your configuration and set READY=true when done
-READY=true
+READY=false
 
 #IP addresses of conjur and crc VM
 CONJUR_IP=192.168.13.58
