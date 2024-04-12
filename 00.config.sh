@@ -5,7 +5,7 @@ READY=false
 
 #Container env setting
 SUDO=
-CONTAINER=docker
+CONTAINER_MGR=docker
 
 #IP addresses of conjur and crc VM
 CONJUR_IP=192.168.13.58
