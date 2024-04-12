@@ -15,7 +15,7 @@ clusterDNS="conjur-master.$POC_DOMAIN"
 standby1DNS="$node_name.$POC_DOMAIN"
 adminPass=$POC_CONJUR_ADMIN_PW
 accountName=$POC_CONJUR_ACCOUNT
-docker exec $masterContainer evoke configure $serverType \
+$SUDO $CONTAINER_MGR exec $masterContainer evoke configure $serverType \
     --accept-eula -h $masterDNS \
     --master-altnames "$clusterDNS,$standby1DNS" \
     -p $adminPass $accountName
