@@ -3,6 +3,10 @@
 #Change your configuration and set READY=true when done
 READY=false
 
+#Container env setting
+SUDO=
+CONTAINER=docker
+
 #IP addresses of conjur and crc VM
 CONJUR_IP=192.168.13.58
 POC_IP=$CONJUR_IP
