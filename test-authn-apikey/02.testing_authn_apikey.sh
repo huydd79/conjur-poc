@@ -14,7 +14,7 @@ fi
 source ./user.conf
 
 CONJUR_VAR_PASSWORD="test/host1/pass"
-CONJUR_URL="https://conjur.$POC_DOMAIN:$POC_CONJUR_HTTPS_PORT"
+CONJUR_URL="https://$CONJUR_IP:$POC_CONJUR_HTTPS_PORT"
 
 set -x
 
