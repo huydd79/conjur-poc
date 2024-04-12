@@ -45,7 +45,7 @@ CONF_FILE=/opt/cyberark/conjur/config/conjur.yml
 echo "#This file is created by script: 02.configuring_jwt_script.sh" > $CONF_FILE
 echo "authenticators:" >> $CONF_FILE
 
-auth_json=$(curl -sk $CONJUR_URL:8443/info | jq '.authenticators')
+auth_json=$(curl -sk $CONJUR_URL/info | jq '.authenticators')
 count=$(echo $auth_json | jq '.configured | length')
 for (( i=0; i<$count; i++  )); do
     auth=$(echo $auth_json | jq ".configured[$i]" | tr -d '"')
