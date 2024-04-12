@@ -7,6 +7,8 @@ if [[ "$READY" != true ]]; then
     exit
 fi
 
+mkdir -p data
+
 if [ ! -f $PRV_KEY_FILE ]; then
     echo "Key pair is not existed. Generating new one... " 
     # Generating key pair
