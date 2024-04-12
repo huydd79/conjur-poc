@@ -9,8 +9,8 @@ fi
 
 set +x
 
-docker load -i  $UPLOAD_DIR/$conjur_appliance_file
+$SUDO $CONTAINER_MGR load -i  $UPLOAD_DIR/$conjur_appliance_file
 
-docker image ls
+$SUDO $CONTAINER_MGR image ls
 
 set -x
