@@ -57,5 +57,5 @@ $SUDO $CONTAINER_MGR exec conjur evoke configuration apply
 [[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
 
 echo "Double check for the authenticator configuration:"
-curl -sk https://gitlab.home.huydo.net:8443/info | jq '.authenticators'
+curl -sk CONJUR_URL/info | jq '.authenticators'
 
