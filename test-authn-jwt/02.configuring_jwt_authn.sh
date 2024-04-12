@@ -13,7 +13,7 @@ if [ ! -f "$PUB_CRT_FILE.jwks" ]; then
     exit
 fi
 
-CONJUR_URL="https://conjur.$POC_DOMAIN:$POC_CONJUR_HTTPS_PORT"
+CONJUR_URL="https://$CONJUR_IP:$POC_CONJUR_HTTPS_PORT"
 # Loading conjur policy for host id and its permission
 echo "Loading policy for $JWT_HOST_ID and its permission... "
 cp policies/policy-app-access.yaml data/policy-app-access.yaml
