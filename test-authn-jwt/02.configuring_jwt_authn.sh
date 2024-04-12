@@ -41,9 +41,11 @@ conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/issuer -v $JWT_SERVICE_I
 # Generating /etc/conjur/config/conjur.yaml file
 echo "Generating conjur configuration for authenticators options... "
 CONF_FILE=/opt/cyberark/conjur/config/conjur.yml
-[ -f "$CONF_FILE" ] && mv $CONF_FILE $CONF_FILE.bk
-echo "#This file is created by script: 02.configuring_jwt_script.sh" > $CONF_FILE
-echo "authenticators:" >> $CONF_FILE
+[ -f "$CONF_FILE" ] && mv $CONF_FILE $CONF_FILE.bk.$(date +%s)
+cat << EOF > $CONF_FILE
+#This file is created by script: 02.configuring_jwt_script.sh" 
+authenticators:
+EOF
 
 auth_json=$(curl -sk $CONJUR_URL/info | jq '.authenticators')
 count=$(echo $auth_json | jq '.configured | length')
