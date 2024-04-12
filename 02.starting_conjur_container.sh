@@ -7,16 +7,15 @@ if [[ "$READY" != true ]]; then
     exit
 fi
 
-
 set +x
 
-docker stop $node_name
-docker container rm $(docker ps -a | grep $node_name | awk '{print $1}')
+$SUDO $CONTAINER_MGR stop $node_name
+$SUDO $CONTAINER_MGR container rm $($SUDO $CONTAINER_MGR ps -a | grep $node_name | awk '{print $1}')
 
 mkdir -p /opt/cyberark/conjur/{security,config,backups,seeds,logs}
 chmod o+x /opt/cyberark/conjur/config
 
-docker run \
+$SUDO $CONTAINER_MGR run \
     --name conjur \
     --detach \
     --restart=unless-stopped \
@@ -33,6 +32,6 @@ docker run \
     --volume /opt/cyberark/conjur/logs:/var/log/conjur:Z \
     registry.tld/conjur-appliance:$conjur_version
 
-docker ps
+$SUDO $CONTAINER_MGR ps
 
 set -x
