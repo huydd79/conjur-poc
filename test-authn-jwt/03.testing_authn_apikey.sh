@@ -13,7 +13,7 @@ if [ ! -f "$JWT_FILE" ]; then
     exit
 fi
 
-CONJUR_URL="https://conjur.$POC_DOMAIN:$POC_CONJUR_HTTPS_PORT"
+CONJUR_URL="https://$CONJUR_IP:$POC_CONJUR_HTTPS_PORT"
 
 JWT=$(cat $JWT_FILE)
 
