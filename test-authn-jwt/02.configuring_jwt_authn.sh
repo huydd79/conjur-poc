@@ -53,7 +53,7 @@ for (( i=0; i<$count; i++  )); do
     echo "  - $auth" >> $CONF_FILE
 done
 echo "Activating authn-jwt/$JWT_SERVICE_ID authenticator..."
-docker exec conjur evoke configuration apply
+$SUDO $CONTAINER_MGR exec conjur evoke configuration apply
 [[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
 
 echo "Double check for the authenticator configuration:"
