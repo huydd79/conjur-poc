@@ -27,7 +27,7 @@ $SUDO $CONTAINER_MGR run \
     --log-driver journald \
     --volume /opt/cyberark/conjur/config:/etc/conjur/config:Z \
     --volume /opt/cyberark/conjur/security:/opt/cyberark/conjur/security:Z \
-    --volume /opt/cyberark/conjur/backups:/opt/conjur/backup:Z \
+    --volume /opt/cyberark/conjur/backups:/opt/cyberark/conjur/backup:Z \
     --volume /opt/cyberark/conjur/seeds:/opt/cyberark/conjur/seeds:Z \
     --volume /opt/cyberark/conjur/logs:/var/log/conjur:Z \
     registry.tld/conjur-appliance:$conjur_version
