@@ -4,8 +4,8 @@ node_name=conjur
 
 set +x
 
-data_file="$(ls -t /opt/cyberark/conjur/backups/*.gpg | head -n1)"
-key_file="/opt/cyberark/conjur/backups/key"
+data_file="$(ls -t /opt/cyberark/$node_name/backups/*.gpg | head -n1)"
+key_file="/opt/cyberark/$node_name/backups/key"
 data_file_name="$(basename $data_file)"
 
 if [ ! -f $data_file ] || [ ! -f $key_file ]; then
