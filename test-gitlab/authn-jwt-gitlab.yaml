@@ -1,7 +1,7 @@
 # Define the JWT Authenticator endpoint in Conjur
 - !policy
   id: conjur/authn-jwt/gitlab
-  annottions:
+  annotations:
     description: JWT Authenticator web service for gitlab
     gitlab: true
   body:
