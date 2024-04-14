@@ -34,7 +34,6 @@
   - !layer
   - &github-hosts
     - !host
-    - !host
       id: huydd79
       annotations:
         authn-jwt/github/repository_owner_id: 86530496
