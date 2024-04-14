@@ -1,0 +1,60 @@
+# Define the JWT Authenticator endpoint in Conjur
+- !policy
+  id: conjur/authn-jwt/gitlab
+  annottions:
+    description: JWT Authenticator web service for gitlab
+    gitlab: true
+  body:
+  - !webservice
+  - !variable jwks-uri
+  - !variable ca-cert
+  - !variable token-app-property
+  - !variable identity-path
+  - !variable issuer
+
+  # Group of applications that can authenticate using this JWT Authenticator
+  - !group apps
+  - !permit
+    role: !group apps
+    privilege: [ read, authenticate ]
+    resource: !webservice
+
+  - !webservice status
+
+  # Group of users who can check the status of the JWT Authenticator
+  - !group operators
+  - !permit
+    role: !group operators
+    privilege: [ read ]
+    resource: !webservice status
+
+# Group and policy for gitlab hosts
+- !group gitlab-admins
+- !policy
+  id: jwt-apps/gitlab
+  owner: !group gitlab-admins
+  body:
+  - !layer
+  - &gitlab-hosts
+    - !host
+      id: test/test02
+      annotations:
+        authn-jwt/gitlab/sub: project_path:test/test02:ref_type:branch:ref:main
+    - !host
+      id: test/test03
+      annotations:
+        authn-jwt/gitlab/sub: project_path:test/test03:ref_type:branch:ref:main
+  - !grant
+    role: !layer
+    members: *gitlab-hosts
+
+# Give the Conjur Follower permission to authenticate to Conjur and to use the seed service using the JWT Authenticator endpoint.
+- !grant
+  roles: !group conjur/authn-jwt/gitlab/apps
+  members: !layer jwt-apps/gitlab
+
+# Grant the host permissions to the JWT Authenticator and secrets
+- !grant
+  roles:
+  - !layer test/test_hosts
+  member: !layer jwt-apps/gitlab

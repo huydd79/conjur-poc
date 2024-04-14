@@ -1,0 +1,30 @@
+- !delete
+  record: !group conjur/authn-jwt/github/apps
+- !delete
+  record: !group conjur/authn-jwt/github/operators
+- !delete
+  record: !group github-admins
+- !delete
+  record: !host jwt-apps/github/Conjur-Authn-JWT
+- !delete
+  record: !host jwt-apps/github/huydd79
+- !delete
+  record: !layer jwt-apps/github
+- !delete
+  record: !policy conjur/authn-jwt/github
+- !delete
+  record: !policy jwt-apps/github
+- !delete
+  record: !variable conjur/authn-jwt/github/enforced-claims
+- !delete
+  record: !variable conjur/authn-jwt/github/identity-path
+- !delete
+  record: !variable conjur/authn-jwt/github/issuer
+- !delete
+  record: !variable conjur/authn-jwt/github/jwks-uri
+- !delete
+  record: !variable conjur/authn-jwt/github/token-app-property
+- !delete
+  record: !webservice conjur/authn-jwt/github
+- !delete
+  record: !webservice conjur/authn-jwt/github/status

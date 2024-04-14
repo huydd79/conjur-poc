@@ -1,0 +1,54 @@
+# Define the JWT Authenticator endpoint in Conjur
+- !policy
+  id: conjur/authn-jwt/github
+  body:
+  - !webservice
+  - !variable jwks-uri
+  - !variable token-app-property
+  - !variable identity-path
+  - !variable issuer
+  - !variable enforced-claims
+
+  # Group of applications that can authenticate using this JWT Authenticator
+  - !group apps
+  - !permit
+    role: !group apps
+    privilege: [ read, authenticate ]
+    resource: !webservice
+
+  - !webservice status
+
+  # Group of users who can check the status of the JWT Authenticator
+  - !group operators
+  - !permit
+    role: !group operators
+    privilege: [ read ]
+    resource: !webservice status
+
+# Group and policy for github hosts
+- !group github-admins
+- !policy
+  id: jwt-apps/github
+  owner: !group github-admins
+  body:
+  - !layer
+  - &github-hosts
+    - !host
+    - !host
+      id: huydd79
+      annotations:
+        authn-jwt/github/repository_owner_id: 86530496
+  - !grant
+    role: !layer
+    members: *github-hosts
+
+# Granting github layer to apps group
+- !grant
+  roles: !group conjur/authn-jwt/github/apps
+  members: !layer jwt-apps/github
+
+# Grant the host permissions to test data
+- !grant
+  roles:
+  - !layer test/test_hosts
+  member: !layer jwt-apps/github
