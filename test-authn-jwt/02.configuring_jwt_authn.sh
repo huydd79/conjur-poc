@@ -14,20 +14,20 @@ if [ ! -f "$PUB_CRT_FILE.jwks" ]; then
 fi
 
 CONJUR_URL="https://$CONJUR_IP:$POC_CONJUR_HTTPS_PORT"
-# Loading conjur policy for host id and its permission
-echo "Loading policy for $JWT_HOST_ID and its permission... "
-cp policies/policy-app-access.yaml data/policy-app-access.yaml
-sed -i "s/\$JWT_SERVICE_ID/$JWT_SERVICE_ID/g" data/policy-app-access.yaml
-sed -i "s/\$JWT_HOST_ID/$JWT_HOST_ID/g" data/policy-app-access.yaml
-conjur policy load -b root -f data/policy-app-access.yaml
-[[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
-
 
 # Loading conjur policy for jwt authentication
 echo "Configuring authn-jwt/$JWT_SERVICE_ID authenticator... "
 cp policies/policy-jwt-auth.yaml data/policy-jwt-auth.yaml
 sed -i "s/\$JWT_SERVICE_ID/$JWT_SERVICE_ID/g" data/policy-jwt-auth.yaml
 conjur policy load -b root -f data/policy-jwt-auth.yaml
+[[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
+
+# Loading conjur policy for host id and its permission
+echo "Loading policy for $JWT_HOST_ID and its permission... "
+cp policies/policy-app-access.yaml data/policy-app-access.yaml
+sed -i "s/\$JWT_SERVICE_ID/$JWT_SERVICE_ID/g" data/policy-app-access.yaml
+sed -i "s/\$JWT_HOST_ID/$JWT_HOST_ID/g" data/policy-app-access.yaml
+conjur policy load -b root -f data/policy-app-access.yaml
 [[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
 
 # Loading jwt authentication data
