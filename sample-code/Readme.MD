@@ -7,6 +7,9 @@ Each sample code will have two authentication use cases:
   - https://github.com/huydd79/jwtgen
 
 ## C# sample codes
+- test_conjur_authn_apikey.cs
+- test_conjur_authn_jwt.cs
+These are sample code for testing on your MS Visual Studio project. Sample codes are using RestSharp package for sending HTTPS request to conjur. You will need to install RestSharp for your project. (Tools > NuGet Package Manager > Manage NuGet Package for your solution > Browse)
 
 ## NodeJS sample codes
 - test_conjur_authn_apikey.js
@@ -21,3 +24,6 @@ Sample code can be run using below command:
 ```node <sample_code_file.js> ```
 
 ## Python sample codes
+- test_conjur_authn_apikey.py
+- test_conjur_authn_jwt.py
+These sample codes are using python http.client library for sending REST request.
