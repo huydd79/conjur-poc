@@ -33,4 +33,4 @@ After done script 01 and 02 for generating jwt and configuring conjur, you can r
 ### test-authn-restriction
 This folder contains script to test the configuration of IP restriction for user/host when doing authentication. Run sript 01 to generate configuration file for authentication purpose. Script 02 will add current conjur IP to the restriction list for testhost01 so that only request sending from conjur server is accepted for authentication. Run script 03 will show the authentication successfully but if you copy same curl command and run on other machine, the result will be empty. And in the sametime conjur's log will show the error: ```CONJ00048I Authentication Error: #<Errors::Authentication::InvalidOrigin: CONJ00003E User is not authorized to login from the current origin>```
 
-## Hope this help you to quickly build up your conjur environment for testing and poc/demo purpose
+## Hope this repo will help you to quickly build up your conjur environment for testing and poc/demo purpose
