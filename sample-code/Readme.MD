@@ -9,6 +9,9 @@ Each sample code will have two authentication use cases:
 ## C# sample codes
 
 ## NodeJS sample codes
+- test_conjur_authn_apikey.js
+- test_conjur_authn_jwt.js
+
 The NodeJS sample codes are using request package to send REST request. To run this sample code, you need to install request package before run
 
 ```npm install request```
