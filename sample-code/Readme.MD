@@ -10,7 +10,9 @@ Each sample code will have two authentication use cases:
 
 ## NodeJS sample code
 My NodeJS sample code is using request package to send REST request. To run this sample code, you need to install request package before run
+
 ```npm install request```
+
 Sample code can be run using below command:
 ```node <sample_code_file.js>
 
