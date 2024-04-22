@@ -1,4 +1,4 @@
-# Sample code for Conjur integration
+# Sample codes for Conjur integration
 This folder contains some sample code that you can use for your applications incase you want to send request to conjur to retrive secrets directly. Those sample codes are written on several languages for your reference.
 Each sample code will have two authentication use cases:
 
