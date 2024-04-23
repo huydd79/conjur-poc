@@ -13,17 +13,18 @@ namespace TestConjurAuthnAPIKey
 
         static void Main(string[] args)
         {
-            var client = new RestClient(CONJUR_URL + "/authn/" + CONJUR_ACCOUNT + "/" + CONJUR_USER_ID + "/authenticate");
-            var request = new RestRequest(Method.POST);
+            var client = new RestClient();
+            var request = new RestRequest(CONJUR_URL + "/authn/" + CONJUR_ACCOUNT + "/" + CONJUR_USER_ID + "/authenticate");
             request.AddHeader("Accept-Encoding", "base64");
             request.AddHeader("Content-Type", "text/plain");
             var body = CONJUR_USER_KEY;
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
+            var response = client.Post(request);
 
             Console.WriteLine("Auth request result: " + (int)response.StatusCode + " " + response.StatusCode);
 
-            if ((int)response.StatusCode != 200) {
+            if ((int)response.StatusCode != 200)
+            {
                 Console.WriteLine("Authentication failed. Press any key to exit...");
                 Console.ReadLine();
                 return;
@@ -31,12 +32,11 @@ namespace TestConjurAuthnAPIKey
             var TOKEN = response.Content;
             Console.WriteLine("TOKEN: " + TOKEN);
 
-            client = new RestClient(CONJUR_URL + "/secrets/" + CONJUR_ACCOUNT + "/variable/" + CONJUR_SECRET_PATH);
-            request = new RestRequest(Method.GET);
+            request = new RestRequest(CONJUR_URL + "/secrets/" + CONJUR_ACCOUNT + "/variable/" + CONJUR_SECRET_PATH);
             request.AddHeader("Accept-Encoding", "base64");
             request.AddHeader("Content-Type", "text/plain");
-            request.AddHeader("Authorization", "Token token=\"" + TOKEN + "\"" );
-            response = client.Execute(request);
+            request.AddHeader("Authorization", "Token token=\"" + TOKEN + "\"");
+            response = client.Get(request);
 
             Console.WriteLine("Result: " + (int)response.StatusCode + " " + response.StatusCode);
             Console.WriteLine("Secret request result: " + (int)response.StatusCode + " " + response.StatusCode);
@@ -47,4 +47,3 @@ namespace TestConjurAuthnAPIKey
         }
     }
 }
-
