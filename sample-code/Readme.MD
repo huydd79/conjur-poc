@@ -22,7 +22,6 @@ These sample codes are tested on MacOS env using go version go1.22.2 darwin/amd6
 
 ```go run <script.go>```
 
-
 ## NodeJS sample codes
 - test_conjur_authn_apikey.js
 - test_conjur_authn_jwt.js
@@ -40,3 +39,13 @@ Sample code can be run using below command:
 - test_conjur_authn_jwt.py
 
 These sample codes are using python http.client library for sending REST request.
+
+## Ruby sample codes
+- test_conjur_authn_apikey.rb
+- test_conjur_authn_jwt.rb
+
+These code are using ruby net/http package and are tested under ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.x86_64-darwin23]
+
+# END
+
+
