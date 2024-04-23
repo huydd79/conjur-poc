@@ -3,7 +3,7 @@ using System.IO;
 using RestSharp;
 
 
-namespace TestConjurAuthnAPIKey
+namespace TestConjurAuthnJWT
 {
     class Program
     {
@@ -16,8 +16,8 @@ namespace TestConjurAuthnAPIKey
 
         static void Main(string[] args)
         {
-            var client = new RestClient(CONJUR_URL + "/authn-jwt/" + JWT_SERVICE_ID + "/" + CONJUR_ACCOUNT + "/authenticate");
-            var request = new RestRequest(Method.POST);
+            var client = new RestClient();
+            var request = new RestRequest(CONJUR_URL + "/authn-jwt/" + JWT_SERVICE_ID + "/" + CONJUR_ACCOUNT + "/authenticate");
             request.AddHeader("Accept-Encoding", "base64");
             request.AddHeader("Content-Type", "text/plain");
             var JWT = "";
@@ -26,13 +26,15 @@ namespace TestConjurAuthnAPIKey
                 Console.WriteLine("JWT file " + JWT_FILE + " is not found!!!");
                 Console.ReadLine();
                 return;
-            } else {
+            }
+            else
+            {
                 JWT = File.ReadAllText(JWT_FILE);
             }
 
             var body = "jwt=" + JWT;
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
+            var response = client.Post(request);
 
             Console.WriteLine("Auth request result: " + (int)response.StatusCode + " " + response.StatusCode);
 
@@ -45,12 +47,11 @@ namespace TestConjurAuthnAPIKey
             var TOKEN = response.Content;
             Console.WriteLine("TOKEN: " + TOKEN);
 
-            client = new RestClient(CONJUR_URL + "/secrets/" + CONJUR_ACCOUNT + "/variable/" + CONJUR_SECRET_PATH);
-            request = new RestRequest(Method.GET);
+            request = new RestRequest(CONJUR_URL + "/secrets/" + CONJUR_ACCOUNT + "/variable/" + CONJUR_SECRET_PATH);
             request.AddHeader("Accept-Encoding", "base64");
             request.AddHeader("Content-Type", "text/plain");
             request.AddHeader("Authorization", "Token token=\"" + TOKEN + "\"");
-            response = client.Execute(request);
+            response = client.Get(request);
 
             Console.WriteLine("Result: " + (int)response.StatusCode + " " + response.StatusCode);
             Console.WriteLine("Secret request result: " + (int)response.StatusCode + " " + response.StatusCode);
