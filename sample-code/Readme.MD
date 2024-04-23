@@ -14,6 +14,15 @@ Each sample code will have two authentication use cases:
 
 These are sample code for testing on your MS Visual Studio project. Sample codes are using RestSharp package for sending HTTPS request to conjur. You will need to install RestSharp for your project. (Tools > NuGet Package Manager > Manage NuGet Package for your solution > Browse)
 
+## Golang sample codes
+- test_conjur_authn_apikey.go
+- test_conjur_authn_jwt.go
+
+These sample codes are tested on MacOS env using go version go1.22.2 darwin/amd64. To run test, just use go run command
+
+```go run <script.go>```
+
+
 ## NodeJS sample codes
 - test_conjur_authn_apikey.js
 - test_conjur_authn_jwt.js
