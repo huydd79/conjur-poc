@@ -1,0 +1,6 @@
+{
+  "host": "rhel8.cybr.huydo.net",
+  "aud": "huy.do/testjwt-docker",
+  "name": "testjwt-docker",
+  "iss": "https://jwt.home.huydo.net"
+}

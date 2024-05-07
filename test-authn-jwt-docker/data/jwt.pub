@@ -1,0 +1,8 @@
+{
+    "alg": "RS256",
+    "kty": "RSA",
+    "n": "u5lI3Y5KRiq5bvAUYKvo6knI_WRksmVezSNRlGEQZTME4MS6Uqk199lKVpp2WQbkTxPYF_uYDFm40PMIpdEj7AJ3PA4EfKjTB7Vhtlq7rPAD4ftjJ5m_nS3Zl6Nd7CSkj_0-Y7dbECi8k7dMfi1qwvLigMc3mqbDow5Gs8aE5mzLfw7IEQAjt5u4FtHcleCsRGcKo8QW9o8DFkzi7oCIW1QV2C24Vu0-XqUIh8s8ZtG4CAZveCeYgfwmzvSrJnj_59u1pyQLpsZS7Bz0Esso27Jvk2P6ZdG2PAlyMRLpoKVb7joQR2Ebj18NU2de-mZJPm26XjTJh59om_mdIZWjrlnUc9P8-jxCn_a2t9NbZDOjoQUhfowAZdbylfMs_T3GcOtFncX2BFKrX7tgOzMqWH8j_X9MH354IYHEzaZ6qOIFDvWphfzAc_HoYYuT-6U4wWEEbNBI9jKWwU3-O47z8aDN898cb_s3s6uuCsCvLhh9jLPXJp0HyB_nQAKW4O0HObiWffCe9kvrzmszwgmITt8BCmAxf3ndDpdEwgjLIFI9lxmDH0zvE1FwloE3mgwmhOpNlmDbW8KE73Nz45WDjCyHlg2SpqQfN4YnORhzLzDF7C_n3tutNz_zMd8cZqCqhj8kpyAo6I5q4xeeNU2Y2MHSIUl-SDdp4MPgoZlzD2s",
+    "e": "AQAB",
+    "kid": "dde7c2ac9e6f62e6d26cdaa21496ccafaf62ab69",
+    "use": "sig"
+}

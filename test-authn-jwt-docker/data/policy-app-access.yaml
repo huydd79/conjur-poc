@@ -1,0 +1,27 @@
+# Group and policy for testjwt-docker hosts
+- !group testjwt-docker-admins
+- !policy
+  id: jwt-apps/testjwt-docker
+  owner: !group testjwt-docker-admins
+  body:
+  - !layer
+  - &testjwt-docker-hosts
+    - !host
+      id: rhel8.cybr.huydo.net
+      annotations:
+        authn-jwt/testjwt-docker/name: testjwt-docker 
+  - !grant
+    role: !layer
+    members: *testjwt-docker-hosts
+
+# Give the host permission to authenticate to Conjur 
+- !grant
+  roles: !group conjur/authn-jwt/testjwt-docker/apps
+  members: !layer jwt-apps/testjwt-docker
+
+# Grant the host permissions to the JWT Authenticator and secrets
+- !grant
+  roles:
+  - !group conjur/authn-jwt/testjwt-docker/apps
+  - !layer test/test_hosts
+  member: !host jwt-apps/testjwt-docker/rhel8.cybr.huydo.net
