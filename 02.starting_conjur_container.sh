@@ -16,7 +16,7 @@ mkdir -p /opt/cyberark/conjur/{security,config,backups,seeds,logs}
 chmod o+x /opt/cyberark/conjur/config
 
 $SUDO $CONTAINER_MGR run \
-    --name conjur \
+    --name $node_name \
     --detach \
     --restart=unless-stopped \
     --security-opt seccomp=unconfined \
