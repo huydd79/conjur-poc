@@ -8,9 +8,13 @@ if [[ "$READY" != true ]]; then
 fi
 
 set -x
-sudo dpkg -i $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.deb
+#sudo dpkg -i $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.deb
+rpm -Uvh $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.rpm
+
+echo "$CONJUR_IP conjur.$POC_DOMAIN" >> /etc/hosts
 
 conjur init -u https://conjur.$POC_DOMAIN:$POC_CONJUR_HTTPS_PORT --self-signed
 conjur login -i admin
 set +x
 conjur whoami
+

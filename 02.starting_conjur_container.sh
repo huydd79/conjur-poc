@@ -32,6 +32,6 @@ $SUDO $CONTAINER_MGR run \
     --volume /opt/cyberark/conjur/logs:/var/log/conjur:Z \
     registry.tld/conjur-appliance:$conjur_version
 
-$SUDO $CONTAINER_MGR ps
+$SUDO $CONTAINER_MGR ps | grep $node_name
 
 set -x

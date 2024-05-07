@@ -32,7 +32,7 @@ EOF
     openssl req -new -x509 -days 3650 -key $PRV_KEY_FILE -out $PUB_CRT_FILE -config /tmp/cert-tmp.conf
     [[ $? -eq 0 ]] && echo "Key pair created successfully."  || echo "ERROR!!!"
     rm /tmp/cert-tmp.conf
-    chmod -R 600 /etc/ssl/private
+    chmod -R 600 $PRV_KEY_FILE
 fi
 
 

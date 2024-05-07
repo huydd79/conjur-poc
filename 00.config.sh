@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #Change your configuration and set READY=true when done
-READY=false
+READY=true
 
 #Container env setting
 SUDO=
-CONTAINER_MGR=docker
+CONTAINER_MGR=podman
 
 #IP addresses of conjur and crc VM
-CONJUR_IP=192.168.13.58
+CONJUR_IP=192.168.13.13
 POC_IP=$CONJUR_IP
 POC_DOMAIN=home.huydo.net
 POC_CONJUR_ADMIN_PW=ChangeMe123!

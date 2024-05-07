@@ -38,22 +38,18 @@ conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/token-app-property -v ho
 conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/identity-path -v jwt-apps/$JWT_SERVICE_ID
 conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/issuer -v $JWT_SERVICE_ISS
 
+
 # Generating /etc/conjur/config/conjur.yaml file
 echo "Generating conjur configuration for authenticators options... "
 CONF_FILE=/opt/cyberark/conjur/config/conjur.yml
 [ -f "$CONF_FILE" ] && mv $CONF_FILE $CONF_FILE.bk.$(date +%s)
+#Enabling all configured authn methods
+auth_json=$(curl -sk $CONJUR_URL/info | jq '.authenticators.configured')
 cat << EOF > $CONF_FILE
-#This file is created by script: 02.configuring_jwt_script.sh" 
-authenticators:
+#This file is created by script: 02.configuring_jwt_script.sh"
+authenticators: $auth_json
 EOF
 
-auth_json=$(curl -sk $CONJUR_URL/info | jq '.authenticators')
-count=$(echo $auth_json | jq '.configured | length')
-for (( i=0; i<$count; i++  )); do
-    auth=$(echo $auth_json | jq ".configured[$i]" | tr -d '"')
-    echo "Adding auth $i: $auth"
-    echo "  - $auth" >> $CONF_FILE
-done
 echo "Activating authn-jwt/$JWT_SERVICE_ID authenticator..."
 $SUDO $CONTAINER_MGR exec conjur evoke configuration apply
 [[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
