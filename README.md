@@ -17,9 +17,10 @@ These scripts have been built and tested on Ubuntu version 20.4 LTS. Conjur appl
 - Edit 00.config.sh to put in your environment setup detail. Remember to change default password which is ``ChangMe123!`` in this config file. Set READY=true when done.
 - Run 00.installing_docker.sh to check and install docker environment
 - Run scripts no 01-03 for conjur leader implementation. After script 03, check connection to conjur leader using curl -sk https://conjur-host:443/info
-- Run script 04 for installing and setting up conjur CLI environment and login as admin user for further configuration
-- Run script 05 to add demo data to conjur. Demo data will have sample test user, host, group, layer and several secrets for testing purpose
-- Script 06 will require Conjur Vault Synchronizer setup completely before running. This script will asign permission for test user so that it can access to secrets those are synced from Vautl
+- Optional: If you have your own CA and TLS certificates, copy your ca.crt, conjur.crt and conjur.key into certs folder and running script 04.
+- Run script 05 for installing and setting up conjur CLI environment and login as admin user for further configuration
+- Run script 06 to add demo data to conjur. Demo data will have sample test user, host, group, layer and several secrets for testing purpose
+- Script 07 will require Conjur Vault Synchronizer setup completely before running. This script will asign permission for test user so that it can access to secrets those are synced from Vautl
 
 ## Authentication sample for application
 There are two simple test cases of application authentication when sending request to conjur and retrieving secret value. 
