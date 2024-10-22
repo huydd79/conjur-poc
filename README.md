@@ -9,6 +9,8 @@ These scripts have been built and tested on Ubuntu version 20.4 LTS. Conjur appl
 - openssl
 - jq
 - python3
+
+#### NOTE: The certs folder contains certificate for defaul domain: *.poc.local. In case you have diffirent domain name, you need to create your own cert files.
   
 ## Usage 
 - Create /opt/upload folder and copy conjur appliance image, conjur cli package to this folder. Contact your CyberArk's representative for those files and package.

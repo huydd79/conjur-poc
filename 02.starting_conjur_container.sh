@@ -16,7 +16,7 @@ mkdir -p /opt/cyberark/conjur/{security,config,backups,seeds,logs}
 chmod o+x /opt/cyberark/conjur/config
 
 $SUDO $CONTAINER_MGR run \
-    --name $node_name \
+    --name conjur \
     --detach \
     --restart=unless-stopped \
     --security-opt seccomp=unconfined \
@@ -24,14 +24,14 @@ $SUDO $CONTAINER_MGR run \
     --publish "444:444" \
     --publish "5432:5432" \
     --publish "1999:1999" \
-    --log-driver journald \
     --volume /opt/cyberark/conjur/config:/etc/conjur/config:Z \
     --volume /opt/cyberark/conjur/security:/opt/cyberark/conjur/security:Z \
     --volume /opt/cyberark/conjur/backups:/opt/conjur/backup:Z \
     --volume /opt/cyberark/conjur/seeds:/opt/cyberark/conjur/seeds:Z \
+    --volume $PWD/certs:/opt/cyberark/conjur/certs:Z \
     --volume /opt/cyberark/conjur/logs:/var/log/conjur:Z \
     registry.tld/conjur-appliance:$conjur_version
 
-$SUDO $CONTAINER_MGR ps | grep $node_name
+$SUDO $CONTAINER_MGR ps
 
 set -x

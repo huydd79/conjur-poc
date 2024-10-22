@@ -8,12 +8,12 @@ SUDO=
 CONTAINER_MGR=podman
 
 #IP addresses of conjur and crc VM
-CONJUR_IP=192.168.13.13
+CONJUR_IP=172.16.100.57
 POC_IP=$CONJUR_IP
-POC_DOMAIN=home.huydo.net
+POC_DOMAIN=poc.local
 POC_CONJUR_ADMIN_PW=ChangeMe123!
-POC_CONJUR_ACCOUNT=DEMO
-POC_CONJUR_HTTPS_PORT=8443
+POC_CONJUR_ACCOUNT=POC
+POC_CONJUR_HTTPS_PORT=443
 #Path to folder with all docker images
 UPLOAD_DIR=/opt/upload
 conjur_appliance_file=conjur-appliance-Rls-v13.2.0.tar.gz
