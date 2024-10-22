@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Change your configuration and set READY=true when done
-READY=true
+READY=false
 
 #Container env setting
 SUDO=
