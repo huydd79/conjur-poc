@@ -1,0 +1,57 @@
+# Define the JWT Authenticator endpoint in Conjur
+- !policy
+  id: conjur/authn-jwt/ocp
+  annotations:
+    description: JWT Authenticator web service for Openshift
+    openshift: true
+  body:
+  - !webservice
+  
+  - !variable public-keys
+  - !variable issuer
+  - !variable token-app-property
+  - !variable identity-path
+  - !variable audience
+
+  # Group of applications that can authenticate using this JWT Authenticator
+  - !group apps
+  - !permit
+    role: !group apps
+    privilege: [ read, authenticate ]
+    resource: !webservice
+
+  - !webservice status
+
+  # Group of users who can check the status of the JWT Authenticator
+  - !group operators
+  - !permit
+    role: !group operators
+    privilege: [ read ]
+    resource: !webservice status
+
+# Group and policy for ocp hosts
+- !group ocp-admins
+- !policy
+  id: jwt-apps/ocp
+  owner: !group ocp-admins
+  body:
+  - !layer
+  - &ocp-hosts
+    - !host
+      id: system:serviceaccount:cyberark-poc:conjur-test
+      annotations:
+        authn-jwt/ocp/kubernetes.io/namespace: cyberark-poc
+  - !grant
+    role: !layer
+    members: *ocp-hosts
+
+# Give the Conjur Follower permission to authenticate to Conjur and to use the seed service using the JWT Authenticator endpoint.
+- !grant
+  roles: !group conjur/authn-jwt/ocp/apps
+  members: !layer jwt-apps/ocp
+
+# Grant the host permissions to the JWT Authenticator and secrets
+- !grant
+  roles:
+  - !layer test/test_hosts
+  member: !layer jwt-apps/ocp
