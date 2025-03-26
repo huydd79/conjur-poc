@@ -1,0 +1,32 @@
+- !delete
+  record: !group conjur/authn-jwt/jenkins/apps
+- !delete
+  record: !group conjur/authn-jwt/jenkins/operators
+- !delete
+  record: !group jenkins-admins
+- !delete
+  record: !host jwt-apps/jenkins/POC/JenkinsTest01
+- !delete
+  record: !host jwt-apps/jenkins/POC/JenkinsTest02
+- !delete
+  record: !layer jwt-apps/jenkins
+- !delete
+  record: !policy conjur/authn-jwt/jenkins
+- !delete
+  record: !policy jwt-apps/jenkins
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/ca-cert
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/identity-path
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/issuer
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/jwks-uri
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/public-keys
+- !delete
+  record: !variable conjur/authn-jwt/jenkins/token-app-property
+- !delete
+  record: !webservice conjur/authn-jwt/jenkins
+- !delete
+  record: !webservice conjur/authn-jwt/jenkins/status
