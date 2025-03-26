@@ -8,7 +8,7 @@ SUDO=
 CONTAINER_MGR=podman
 
 #IP addresses of conjur and crc VM
-CONJUR_IP=10.0.0.1
+CONJUR_IP=10.0.0.2
 POC_IP=$CONJUR_IP
 POC_DOMAIN=poc.local
 POC_CONJUR_ADMIN_PW=ChangeMe123!
