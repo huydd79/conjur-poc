@@ -24,6 +24,7 @@ $SUDO $CONTAINER_MGR run \
     --publish "444:444" \
     --publish "5432:5432" \
     --publish "1999:1999" \
+    --cap-add AUDIT_WRITE \
     --volume /opt/cyberark/conjur/config:/etc/conjur/config:Z \
     --volume /opt/cyberark/conjur/security:/opt/cyberark/conjur/security:Z \
     --volume /opt/cyberark/conjur/backups:/opt/conjur/backup:Z \
