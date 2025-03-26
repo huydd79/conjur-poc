@@ -2,7 +2,7 @@
 
 openssl s_client -showcerts \
     -connect conjur.poc.local:443 < /dev/null 2> /dev/null \
-    | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > certs/conjur.pem
+    | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /opt/jenkins/certs/conjur.pem
 
 podman exec -it -u root jenkins \
     bash -c 'keytool -import -alias conjur \
