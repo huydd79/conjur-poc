@@ -9,7 +9,7 @@ fi
 
 set -x
 #sudo dpkg -i $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.deb
-rpm -Uvh $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.rpm
+rpm -Uvh $UPLOAD_DIR/conjur-cli-go_8.0.16_386.rpm
 
 echo "$CONJUR_IP conjur.$POC_DOMAIN" >> /etc/hosts
 
