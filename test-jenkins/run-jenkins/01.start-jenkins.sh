@@ -1,5 +1,8 @@
 #!/bin/sh
 
+mkdir -p /opt/jenkins/data /opt/jenkins/certs
+chmod 777 /opt/jenkins/*
+
 podman stop jenkins
 podman container rm $(podman ps -a | grep jenkins | awk '{print $1}')
 
