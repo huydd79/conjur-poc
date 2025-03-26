@@ -28,7 +28,7 @@ $SUDO $CONTAINER_MGR exec $masterContainer evoke ca import \
 $SUDO $CONTAINER_MGR exec $masterContainer sv restart conjur nginx pg seed
 
 #Adding root ca to host's trusted authorities (this is applied for RHEL only)
-cp /opt/cyberark/conjur/certs/ca.crt /etc/pki/ca-trust/source/anchors/
+cp /opt/conjur-poc/certs/ca.crt /etc/pki/ca-trust/source/anchors/
 update-ca-trust extract
 
 set +x
