@@ -16,7 +16,7 @@ POC_CONJUR_ACCOUNT=POC
 POC_CONJUR_HTTPS_PORT=443
 #Path to folder with all docker images
 UPLOAD_DIR=/opt/upload
-conjur_appliance_file=conjur-appliance-Rls-v13.5.0.tar.gz
-conjur_version=13.5.0
+conjur_appliance_file=conjur-appliance-Rls-v13.7.0.tar.gz
+conjur_version=13.7.0
 #Conjur container name
 node_name=conjur
