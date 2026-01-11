@@ -1,9 +1,18 @@
-*.tmp
-*.pem
-*.log
-tmp/
-logs/
-secrets/
-.env
-.DS_Store
+# Ignore actual configuration with passwords
 00.config.sh
+.vault_sync_creds.txt
+.sync_creds.txt
+
+# Ignore sensitive keys and certificates
+*.pem
+*.key
+*.enc
+*.bk
+*.log
+
+# Ignore logs and backups
+logs/
+backups/
+tmp/
+sript.txt
+conjur-ctl.sh
