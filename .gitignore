@@ -19,3 +19,4 @@ sript.txt
 conjur-ctl.sh
 test-authn-jwt/data
 test-authn-jwt-docker/data
+test-summon/hdo-summon2file/test_data

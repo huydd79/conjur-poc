@@ -1,0 +1,1 @@
+Container image running summon to get secret from conjur and encrypting using public key. Application can decrypt data using its private key.
