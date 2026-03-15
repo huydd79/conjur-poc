@@ -37,18 +37,14 @@
   - !layer
   - &gitlab-hosts
     - !host
-      id: test/test02
+      id: huydd79/testgitops-conjur
       annotations:
-        authn-jwt/gitlab/sub: project_path:test/test02:ref_type:branch:ref:main
-    - !host
-      id: test/test03
-      annotations:
-        authn-jwt/gitlab/sub: project_path:test/test03:ref_type:branch:ref:main
+        authn-jwt/gitlab/sub: project_path:huydd79/testgitops-conjur:ref_type:branch:ref:main
   - !grant
     role: !layer
     members: *gitlab-hosts
 
-# Give the Conjur Follower permission to authenticate to Conjur and to use the seed service using the JWT Authenticator endpoint.
+# Grant the JWT apps group permissions to authenticate using the JWT Authenticator
 - !grant
   roles: !group conjur/authn-jwt/gitlab/apps
   members: !layer jwt-apps/gitlab

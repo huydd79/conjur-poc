@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "THIS IS MESSAGE INSIDE THE TEST SCRIPT. IT SHOULD BE EXECUTED BY SUMMON, NOT DIRECTLY."
+echo "=====  CONJUR ENV    ====="
+env | grep "CONJUR"
+echo "===== CONJUR SECRET ======"
+echo "PASSWORD=$PASSWORD"

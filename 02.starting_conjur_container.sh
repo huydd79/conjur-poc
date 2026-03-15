@@ -22,8 +22,6 @@ $SUDO $CONTAINER_MGR run \
     --security-opt seccomp=unconfined \
     --publish "$POC_CONJUR_HTTPS_PORT:443" \
     --publish "444:444" \
-    --publish "5432:5432" \
-    --publish "1999:1999" \
     --cap-add AUDIT_WRITE \
     --volume /opt/cyberark/conjur/config:/etc/conjur/config:Z \
     --volume /opt/cyberark/conjur/security:/opt/cyberark/conjur/security:Z \

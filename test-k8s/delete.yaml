@@ -1,0 +1,9 @@
+- !delete
+  record: !host jwt-apps/k8s/system:serviceaccount:default:testapp01
+
+
+- !delete
+  record: !host jwt-apps/k8s/system:serviceaccount:default:testapp02
+
+- !delete
+  record: !host jwt-apps/k8s/system:serviceaccount:default:webapp03

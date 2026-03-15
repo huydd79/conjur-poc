@@ -8,8 +8,8 @@ if [[ "$READY" != true ]]; then
 fi
 
 set -x
-#sudo dpkg -i $UPLOAD_DIR/conjur-cli-go_8.0.9_amd64.deb
-rpm -Uvh $UPLOAD_DIR/conjur-cli-go_8.0.16_386.rpm
+sudo dpkg -i $UPLOAD_DIR/conjur-cli_9.1.0_amd64.deb
+#rpm -Uvh $UPLOAD_DIR/conjur-cli_9.1.0_amd64.deb
 
 echo "$CONJUR_IP conjur.$POC_DOMAIN" >> /etc/hosts
 

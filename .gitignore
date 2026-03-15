@@ -9,6 +9,7 @@
 *.enc
 *.bk
 *.log
+*.conf
 
 # Ignore logs and backups
 logs/
@@ -16,3 +17,5 @@ backups/
 tmp/
 sript.txt
 conjur-ctl.sh
+test-authn-jwt/data
+test-authn-jwt-docker/data

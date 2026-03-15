@@ -1,0 +1,2 @@
+PUBLIC_KEYS='{"keys":[{"use":"sig","kty":"RSA","kid":"BI26XovOSd877GhCt8uMj0zyXbhBeDb6Z_2Eij0FsPw","alg":"RS256","n":"8lzd1r2a_7PLXqk2_FBxKLsshDN9PiWQvEN70mZtMGd8Z1MH2Yly6WWPGL3bOvXg_CVr7c62WF-hUF3ypqBkN7KXD78QAUyIPc9BTEZSi33kvsi2WifnUjb9pMiGDBlYG-5jUMesJG602_eoxh0PGjQ0G0ZRcYhtaT5k0-yHEwhmUHqrLwNvLuy2DmHQrFWWUKjc7diTkPyFR3kOgU2F1qNjzZN7Nqwqw74yn8SRim5rJYHy3YHOzFQ49ZemHvzlOAchHZjY5Jqtwdy-nhmVc9wXJYLafJPJwRPf7tiZKM7-ovWGmB3YKVC00kQW_KKKGv1cnsCilHBnESKr49CyTw","e":"AQAB"}]}'
+ISSUER='https://kubernetes.default.svc.cluster.local'
