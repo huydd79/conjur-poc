@@ -18,7 +18,9 @@ node_name=jwtgen
 $SUDO $CONTAINER_MGR stop $node_name
 $SUDO $CONTAINER_MGR container rm $($SUDO $CONTAINER_MGR ps -a | grep $node_name | awk '{print $1}')
 
-rm data/*
+mkdir -p data/jwtgen
+mkdir -p data/ssl/private
+
 # Preparing jwt header
 echo "Generating jwt header... "
 cat <<EOF > $JWT_HEADER_FILE
@@ -44,7 +46,8 @@ $SUDO $CONTAINER_MGR run \
     --name $node_name \
     --detach \
     --restart=unless-stopped \
-    --volume $PWD/data:/etc/jwtgen:z \
+    --volume $PWD/data/jwtgen:/etc/jwtgen:z \
+    --volume $PWD/data/ssl/private:/etc/ssl/private:z \
      -e JWT_EXPIRE=$JWT_EXPIRE \
     doduchuy/hdo-jwtgen
         
