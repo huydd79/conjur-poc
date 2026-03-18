@@ -8,7 +8,7 @@ fi
 
 source ./00.config.sh
 
-if [ ! -f "$PUB_CRT_FILE.jwks" ]; then
+if [ ! -f "$PUB_JWKS_FILE" ]; then
     echo "Please generate jwks file before running this script"
     exit
 fi
@@ -32,7 +32,7 @@ conjur policy load -b root -f data/policy-app-access.yaml
 
 # Loading jwt authentication data
 echo "Loading jwt authentication data... "
-pub_keys='{"type":"jwks", "value": {"keys":['$(cat $PUB_CRT_FILE.jwks)']}}'
+pub_keys='{"type":"jwks", "value": {"keys":['$(cat $PUB_JWKS_FILE)']}}'
 conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/public-keys -v "$pub_keys"
 conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/token-app-property -v host
 conjur variable set -i conjur/authn-jwt/$JWT_SERVICE_ID/identity-path -v jwt-apps/$JWT_SERVICE_ID
@@ -51,6 +51,7 @@ authenticators: $auth_json
 EOF
 
 echo "Activating authn-jwt/$JWT_SERVICE_ID authenticator..."
+$SUDO $CONTAINER_MGR exec conjur evoke variable unset CONJUR_AUTHENTICATORS
 $SUDO $CONTAINER_MGR exec conjur evoke configuration apply
 [[ $? -eq 0 ]] && echo "Done!!!"  || echo "ERROR!!!"
 

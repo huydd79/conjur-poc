@@ -9,29 +9,36 @@ fi
 
 mkdir -p data
 
-if [ ! -f $PRV_KEY_FILE ]; then
-    echo "Key pair is not existed. Generating new one... " 
-    # Generating key pair
-    cat <<EOF > /tmp/cert-tmp.conf
-[req]
-distinguished_name = HUYDO-LAB
-req_extensions = v3_req
-prompt = no
-[HUYDO-LAB]
-C = VN
-ST = Hanoi
-L = Hanoi
-O = huydo.net
-OU = cybr
-CN = HUYDO-LAB
-[v3_req]
-EOF
 
-    openssl genrsa -aes256 -passout pass:changeme -out $PRV_KEY_FILE.pass.key 4096
-    openssl rsa -passin pass:changeme -in $PRV_KEY_FILE.pass.key -out $PRV_KEY_FILE
-    openssl req -new -x509 -days 3650 -key $PRV_KEY_FILE -out $PUB_CRT_FILE -config /tmp/cert-tmp.conf
-    [[ $? -eq 0 ]] && echo "Key pair created successfully."  || echo "ERROR!!!"
-    rm /tmp/cert-tmp.conf
+# --- Key Persistence Logic ---
+SHOULD_GENERATE=true
+
+# Check if both key and cert exist
+if [[ -f "$PRV_KEY_FILE" && -f "$PUB_KEY_FILE" ]]; then
+    echo "--- Existing key pair found. Checking validity. ---"
+    
+    # Extract modulus from Public Key (note the -pubin flag)
+    PUB_MODULUS=$(openssl rsa -pubin -noout -modulus -in "$PUB_KEY_FILE" 2>/dev/null | openssl md5)
+    
+    # Extract modulus from Private Key
+    PRIV_MODULUS=$(openssl rsa -noout -modulus -in "$PRV_KEY_FILE" 2>/dev/null | openssl md5)
+
+    if [[ -n "$PUB_MODULUS" && "$PUB_MODULUS" == "$PRIV_MODULUS" ]]; then
+        echo "--- Existing key pair is valid. Skipping generation. ---"
+        SHOULD_GENERATE=false
+    else
+        echo "--- Existing key pair is invalid, mismatched or corrupted. Re-generating ---"
+        SHOULD_GENERATE=true
+    fi
+fi
+
+if [ "$SHOULD_GENERATE" = true ]; then
+    echo "--- Key pair is not existed. Generating new one. ---" 
+    # Generating key pair
+    openssl genrsa -out $PRV_KEY_FILE 4096
+    openssl rsa -in $PRV_KEY_FILE -pubout -out $PUB_KEY_FILE
+    [[ $? -eq 0 ]] && echo "--- Key pair created successfully. ---"  || echo "ERROR!!!"
+    #rm /tmp/cert-tmp.conf
     chmod -R 600 $PRV_KEY_FILE
 fi
 
@@ -50,7 +57,9 @@ EOF
 
 # Converting public cert to jwks format
 echo -n "Generating jwks file... "
-./tools/pem2jwks.py $PUB_CRT_FILE $JWT_KID > $PUB_CRT_FILE.jwks
+#./tools/pem2jwks.py $PUB_CRT_FILE $JWT_KID > $PUB_CRT_FILE.jwks
+./tools/pubkey2jwks.py $PUB_KEY_FILE $JWT_KID > $PUB_JWKS_FILE
+
 if [[ $? -eq 0 ]]; then
     echo "done. JWKS content as below:"
     echo "==========================="
