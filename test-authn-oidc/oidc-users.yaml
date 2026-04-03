@@ -19,7 +19,12 @@
   member: !user admin
 
 # --- Define Identity Users ---   
-- !user huy.do
+- !user 
+  id: huy.do
+  owner: !group admins
+  annotations:
+    cyberark: true
+
 
 # Add the specific user to the OIDC users group
 - !grant

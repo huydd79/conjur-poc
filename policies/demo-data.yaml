@@ -1,5 +1,6 @@
 - !policy
   id: test
+  owner: !group admins
   body:
     - !layer
       id: test_hosts
