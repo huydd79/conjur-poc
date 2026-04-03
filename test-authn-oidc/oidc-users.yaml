@@ -1,0 +1,35 @@
+# --- Define Identity Consumers (Users and Groups) ---
+- !group oidc-admins
+- !group oidc-users
+
+# --- Grant Permissions ---
+# Grant the oidc-users group permission to use the 'cybr' OIDC authenticator
+- !grant
+  role: !group conjur/authn-oidc/cybr/users
+  member: !group oidc-users
+
+# Grant the oidc-admins group permission to check the status of the OIDC authenticator
+- !grant
+  role: !group conjur/authn-oidc/cybr/operators
+  member: !group oidc-admins 
+
+# Add admin user to oidc-admins group for setup purposes (optional, can be removed after initial configuration)
+- !grant
+  role: !group oidc-admins
+  member: !user admin
+
+# --- Define Identity Users ---   
+- !user huy.do
+
+# Add the specific user to the OIDC users group
+- !grant
+  role: !group oidc-users
+  member: !user huy.do
+
+
+# Grant the oidc-users group access to existing secret groups (e.g., test/test_users)
+# Note: Ensure 'test/test_users' policy already exists in Conjur
+- !grant
+  role: !group test/test_users
+  member: !group oidc-users
+

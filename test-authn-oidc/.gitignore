@@ -1,0 +1,14 @@
+# Ignore sensitive configuration files
+00.config.sh
+
+# Ignore certificate files if they contain private keys
+*.pem
+*.key
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

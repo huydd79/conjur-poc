@@ -1,0 +1,37 @@
+# --- Define the OIDC Authenticator Service ---
+- !policy
+  id: conjur/authn-oidc/cybr
+  body:
+    - !webservice
+
+    # Mandatory OIDC configuration variables
+    - !variable provider-uri
+    - !variable client-id
+    - !variable client-secret
+    - !variable redirect-uri
+    - !variable claim-mapping
+    
+    # Optional OIDC configuration variables
+    - !variable token-ttl     # Default is 1 hour, max 5 hours
+    #- !variable ca-cert       # Required if using internal/private CA. If using public CA, lets remove this variable to avoid unnecessary CA cert management.
+
+    # Status webservice to check if the authenticator is configured correctly
+    - !webservice
+      id: status
+      annotations:
+        description: "Status service for authn-oidc/cybr"
+
+    # Group for users who can check the status of the authenticator
+    - !group operators
+    - !permit
+       role: !group operators
+       privilege: [ read ]
+       resource: !webservice status
+
+    # Group for users allowed to authenticate via this service
+    - !group users
+    - !permit
+      role: !group users
+      privilege: [ read, authenticate ]
+      resource: !webservice
+

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# SET READY=true WHEN DONE
+READY=false
+
+# =============================================================================
+# CONJUR SERVER PARAMETERS
+# =============================================================================
+export CONJUR_URL="https://your-conjur-server:8443"   # Your Conjur DNS/IP
+export CONJUR_ACCOUNT="YOUR_ACCOUNT"                   # Conjur account name
+
+# =============================================================================
+# OIDC AUTHENTICATOR PARAMETERS (Service ID: cybr)
+# ==============================================================================
+export SERVICE_ID="cybr"
+export AUTHENTICATOR_NAME="authn-oidc/$SERVICE_ID"
+export AUTHENTICATOR_ID="conjur/$AUTHENTICATOR_NAME"
+
+# 1. Provider URI: The Discovery URL from CyberArk Identity
+# Example: https://<tenant_id>.id.cyberark.cloud/oauth2/default
+export OIDC_PROVIDER_URI="https://your-tenant.id.cyberark.cloud/oauth2/default"
+
+# 2. Client Credentials: From the OIDC Web App created in Identity
+export OIDC_CLIENT_ID="your-client-id"
+export OIDC_CLIENT_SECRET="your-client-secret"
+
+# 3. Redirect URIs (Crucial for UI vs CLI)
+# For Conjur UI: Redirects back to the Conjur dashboard
+export OIDC_REDIRECT_URI_UI="https://your-conjur-server/ui/authn-oidc/cybr/callback"
+
+# For Conjur CLI: Redirects to local machine (127.0.0.1) as per CyberArk docs
+export OIDC_REDIRECT_URI_CLI="http://127.0.0.1:8888/callback"
+
+# 4. Claim Mapping: The claim in JWT used to identify the Conjur user
+# Typically set to "email" or "preferred_username"
+export OIDC_CLAIM_MAPPING="preferred_username"
+
+# 5. Token TTL: ISO-8601 format (e.g., PT1H for 1 hour, max PT5H)
+export OIDC_TOKEN_TTL="PT1H"
+
+# 6. CA Certificate Path: Only configure if your IdP uses a private CA
+# Set to "" if using public trusted CA (like Identity SaaS)
+#export OIDC_CA_CERT_PATH="./identity-ca.pem"
